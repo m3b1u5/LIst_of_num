@@ -9,19 +9,31 @@ def list_sum(list1, list2):
 
 def list_sum_manual(list1, list2):
     summary = []
-    diff = len(list1) - len(list2)
-    if diff > 1:
-        for i, v in enumerate(list2):
-            summary.append(list1[i] + v)
-        summary += list1[-diff:]
-    elif diff < 0:
-        for i, v in enumerate(list1):
-            summary.append(list2[i] + v)
-        summary += list2[diff:]
-    else:
-        for i, v in enumerate(list1):
-            summary.append(list2[i] + v)
-    return summary
+    diff = max(len(list1), len(list2))
+    i = 0
+    try:
+        for i in range(0, diff):
+            summary.append(list1[i] + list2[i])
+    except IndexError:
+        if len(list1) > len(list2):
+            summary.extend(list1[i:])
+        else:
+            summary.extend(list2[i:])
+    finally:
+        return summary
+
+    # if diff > 1:
+    #     for i, v in enumerate(list2):
+    #         summary.append(list1[i] + v)
+    #     summary += list1[-diff:]
+    # elif diff < 0:
+    #     for i, v in enumerate(list1):
+    #         summary.append(list2[i] + v)
+    #     summary += list2[diff:]
+    # else:
+    #     for i, v in enumerate(list1):
+    #         summary.append(list2[i] + v)
+    # return summary
 
 
 def main():
